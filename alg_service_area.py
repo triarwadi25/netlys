@@ -41,8 +41,7 @@ def make_buffer(lines, dist, style):
         merged = geom.mergeLines()          # join connected pieces so corners get clean mitre joins
         if merged is not None and not merged.isNull() and not merged.isEmpty():
             geom = merged
-    except Exception:
-        pass
+
     if style == 'round':
         return geom.buffer(dist, 8)
     caps, join = _cap_join_styles()
