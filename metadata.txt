@@ -1,0 +1,19 @@
+[general]
+name=NETLYS
+qgisMinimumVersion=3.16
+description=Road network analysis toolbox: multi-class service areas, shortest/longest paths, OD cost matrix to nearest facilities, and Gamma/Beta connectivity indices.
+about=NETLYS adds road network analysis tools to the QGIS Processing Toolbox. (1) Network Area: service area polygons by distance or travel time with several classes in one layer and Overlap, Dissolve or Split output methods. (2) Shortest and Longest Path between origin and destination points taken from layers or from the map canvas. (3) Distance and travel time from origins to nearest facilities (OD cost matrix). (4) Network Connectivity: edge and node counts with Beta and Gamma indices and interpretation fields. Requires a line layer in a projected CRS with meter units.
+version=0.1.1
+author=YOUR NAME
+email=your.email@example.com
+tracker=https://github.com/YOUR_USERNAME/netlys/issues
+repository=https://github.com/YOUR_USERNAME/netlys
+homepage=https://github.com/YOUR_USERNAME/netlys
+category=Vector
+tags=network analysis, service area, shortest path, connectivity, road network, accessibility, processing
+icon=icon.png
+changelog=0.5.1 - Network Area: polygon corner style option (square/mitre by default, like ArcGIS). 0.5.0 - First release: Network Area (multi-class), Shortest and Longest Path, OD matrix to nearest facilities, Network Connectivity (Beta and Gamma).
+experimental=True
+deprecated=False
+hasProcessingProvider=yes
+server=False
