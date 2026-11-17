@@ -54,12 +54,9 @@ class TimeStrategy(QgsNetworkStrategy):
     def cost(self, distance, feature):
         speed = self.default_speed
         if self.speed_idx >= 0:
-            try:
-                v = float(feature[self.speed_idx])
-                if v > 0:
-                    speed = v
-            except (TypeError, ValueError):
-                pass
+            v = feature[self.speed_idx]
+            if isinstance(v, (int, float)) and v > 0:
+                speed = float(v)
         return distance / (speed * 1000.0 / 60.0)
 
     def requiredAttributes(self):

@@ -27,21 +27,18 @@ from .metrics import reachable_segments, tree_segments
 
 def _cap_join_styles():
     """End-cap and join style constants (compatible with old and new QGIS 3.x)."""
-    try:
+    if hasattr(Qgis, 'EndCapStyle') and hasattr(Qgis, 'JoinStyle'):
         return {'square': Qgis.EndCapStyle.Square, 'flat': Qgis.EndCapStyle.Flat}, Qgis.JoinStyle.Miter
-    except AttributeError:
-        return ({'square': getattr(QgsGeometry, 'CapSquare', 3), 'flat': getattr(QgsGeometry, 'CapFlat', 2)},
-                getattr(QgsGeometry, 'JoinStyleMiter', 2))
+    caps = {'square': getattr(QgsGeometry, 'CapSquare', 3), 'flat': getattr(QgsGeometry, 'CapFlat', 2)}
+    return caps, getattr(QgsGeometry, 'JoinStyleMiter', 2)
 
 
 def make_buffer(lines, dist, style):
     """Buffer reachable line pieces. style: 'square' (angular, ArcGIS-like), 'flat', or 'round'."""
     geom = QgsGeometry.collectGeometry(lines)
-    try:
-        merged = geom.mergeLines()          # join connected pieces so corners get clean mitre joins
-        if merged is not None and not merged.isNull() and not merged.isEmpty():
-            geom = merged
-
+    merged = geom.mergeLines()
+    if merged is not None and not merged.isNull() and not merged.isEmpty():
+        geom = merged
     if style == 'round':
         return geom.buffer(dist, 8)
     caps, join = _cap_join_styles()
